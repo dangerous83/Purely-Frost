@@ -1,6 +1,6 @@
-# Purely Frost Ventures Corporation — Website
+# FPH Ice Plant — Website
 
-Static, 12-page marketing site for Purely Frost (formerly Purely Freeze). No build step is needed: open `index.html` in a browser or upload the folder to any static host (Netlify, Vercel, GitHub Pages, cPanel).
+Static, 12-page marketing site for FPH Ice Plant (formerly Purely Freeze), a Fourth Pacific Holdings company. No build step is needed: open `index.html` in a browser or upload the folder to any static host (Netlify, Vercel, GitHub Pages, cPanel).
 
 ## Pages
 | File | Page |
@@ -28,6 +28,6 @@ Every image spot is a `<div class="ph ...">` block labelled with what belongs th
 ```
 
 ## Before going live
-- Confirm emails (`@purelyfrost.com`), phone, address and social links.
+- Confirm emails (`@fphiceplant.com`), phone, address and social links.
 - Connect the forms (contact, investor deck, newsletter) to a backend or form service such as Formspree or Netlify Forms. They currently validate input and show a thank-you message, but send nothing.
 - Replace placeholder leadership names, timeline phases, testimonial and certification badges.

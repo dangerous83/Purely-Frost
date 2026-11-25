@@ -1,4 +1,4 @@
-/* Purely Frost Ventures Corporation — site interactions */
+/* FPH Ice Plant — site interactions */
 (function () {
   "use strict";
   var doc = document.documentElement;
@@ -144,7 +144,7 @@
         var src = p.getAttribute("data-img");
         if (sig) {
           sig.parentElement.classList.toggle("no-photo", !src);
-          if (src) { sig.src = src; sig.alt = "Purely Frost purified tube ice, " + p.getAttribute("data-name") + " bag"; }
+          if (src) { sig.src = src; sig.alt = "FPH Ice Plant purified tube ice, " + p.getAttribute("data-name") + " bag"; }
         }
       });
     });

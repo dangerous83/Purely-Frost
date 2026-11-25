@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Purely Frost Ventures Corporation — Global Stylesheet
+   FPH Ice Plant — Global Stylesheet
    ========================================================================== */
 
 :root {
@@ -973,3 +973,5 @@ section { position: relative; }
 .footer-bottom { padding-top: 24px; padding-bottom: 24px; padding-left: 24px; padding-right: 24px; border-top: 0; position: relative; }
 .footer-bottom::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 1px; background: var(--line-dark); }
 @media (max-width: 600px) { .footer-bottom { padding-left: 16px; padding-right: 16px; } .footer-bottom::before { left: 16px; right: 16px; } }
+.brand-name em { font-style: normal; color: var(--ice); font-weight: 600; }
+.brand-name small { letter-spacing: .16em; font-size: 9px; }
