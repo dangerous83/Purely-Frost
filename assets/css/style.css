@@ -721,3 +721,103 @@ section { position: relative; }
 .field label.choice span { color: var(--text); }
 .field label.choice span small { letter-spacing: 0; }
 .field .check input, .field .choice input { width: auto; padding: 0; flex: 0 0 auto; }
+
+/* ==========================================================================
+   Responsive layer — mobile · tablet · laptop · desktop · wide screen
+   ========================================================================== */
+.grid > *, .split > *, .hero-grid > *, .tiers > *, .footer-top > * { min-width: 0; }
+
+/* Laptop (1101–1366): tighter nav so all links fit */
+@media (min-width: 1101px) and (max-width: 1366px) {
+  .nav-links a, .nav-links button.nav-drop { padding: 10px 10px; font-size: 11.5px; letter-spacing: .1em; }
+  .nav-cta .btn { padding: 11px 16px; }
+  .hero-grid { gap: 40px; }
+}
+@media (max-width: 1100px) { .stack-ph .ph-small { right: 0; } }
+
+/* Tablet (≤1000) */
+@media (max-width: 1000px) {
+  .topbar-tag { display: none; }
+  .topbar .container { justify-content: center; }
+  .hero { padding: 140px 0 90px; }
+  .hero-visual { max-width: 440px; margin: 8px auto 0; width: 100%; }
+  .hero-card .ph { aspect-ratio: 4/3; }
+  .hero-stats { max-width: none; }
+  .section-head { margin-bottom: 40px; }
+}
+
+/* Mobile (≤600) */
+@media (max-width: 600px) {
+  body { font-size: 15.5px; }
+  .topbar { display: none; }
+  .nav { height: 68px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .brand-name { font-size: 18px; }
+  .hero { padding: 110px 0 70px; min-height: auto; }
+  .hero-badge { font-size: 10px; letter-spacing: .1em; }
+  .hero-sub { font-size: 11.5px; letter-spacing: .14em; }
+  .btn-row .btn { flex: 1 1 100%; }
+  .btn { white-space: normal; text-align: center; padding: 14px 20px; }
+  .hero-visual { max-width: 100%; }
+  .float-chip { padding: 10px 14px; }
+  .float-chip .k { font-size: 17px; }
+  .chip-a { left: 0; top: 8%; } .chip-b { right: 0; bottom: 8%; }
+  .page-hero { padding: 130px 0 64px; }
+  .card { padding: 24px; }
+  .card .ph { margin: -8px -8px 20px; }
+  .product-card .body { padding: 22px; }
+  .tier { padding: 32px 22px; }
+  .cta-band { border-radius: 22px; padding: 40px 22px; }
+  .form-card { padding: 22px 18px; border-radius: 18px; }
+  .stat-band > div { padding: 24px 14px; }
+  .stat-num { font-size: 26px; }
+  .metric { padding: 26px; }
+  .faq-q { font-size: 16px; padding: 18px; }
+  .faq-a p { padding: 0 18px 18px; }
+  .thesis li { grid-template-columns: 44px 1fr; gap: 12px; padding: 20px 0; }
+  .map-wrap { padding: 18px; }
+  .whatsapp { width: 52px; height: 52px; right: 16px; bottom: 16px; }
+  .to-top { right: 20px; bottom: 80px; }
+  .lightbox { padding: 12px; }
+  .footer-bottom { flex-direction: column; }
+}
+@media (max-width: 380px) {
+  .display { font-size: 38px; }
+  .page-hero .display { font-size: 34px; }
+  .h2 { font-size: 30px; }
+}
+
+/* Large desktop (≥1600) */
+@media (min-width: 1600px) {
+  :root { --container: 1440px; }
+  body { font-size: 17px; }
+  .display { font-size: clamp(104px, 6.6vw, 128px); }
+  .page-hero .display { font-size: clamp(88px, 5.6vw, 108px); }
+  .h2 { font-size: clamp(62px, 3.8vw, 76px); }
+  .lead { font-size: 21px; max-width: 760px; }
+  .nav { height: 84px; }
+  .nav-links a, .nav-links button.nav-drop { font-size: 13px; padding: 11px 16px; }
+  .hero-stats { max-width: 760px; }
+  .card { padding: 38px; }
+  .card h3 { font-size: 24px; }
+  .gallery { grid-auto-rows: 260px; }
+}
+
+/* Wide screen / 2K–4K (≥2200) */
+@media (min-width: 2200px) {
+  :root { --container: 1760px; }
+  body { font-size: 19px; }
+  .display { font-size: 150px; }
+  .page-hero .display { font-size: 124px; }
+  .h2 { font-size: 88px; }
+  .h3, .card h3 { font-size: 28px; }
+  .lead { font-size: 24px; max-width: 880px; }
+  .eyebrow, .index-tag, .stat-label, .card .tag { font-size: 14px; }
+  .btn { font-size: 15px; padding: 18px 32px; }
+  .stat-num { font-size: 56px; }
+  .metric .val { font-size: 72px; }
+  .brand-mark { width: 48px; height: 48px; }
+  .brand-name { font-size: 24px; }
+  .gallery { grid-auto-rows: 320px; }
+  .section { padding: 180px 0; }
+}
