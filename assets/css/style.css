@@ -1133,3 +1133,16 @@ section { position: relative; }
 .wa-panel { background: linear-gradient(160deg, rgba(43,53,78,.97), rgba(19,26,55,.98) 55%), var(--ink); }
 .tour-play { color: var(--ink); }
 .map-dir:hover { color: var(--ink); }
+
+/* ---------- Brand logo image ---------- */
+.brand-logo { height: 42px; width: auto; display: block; }
+.footer-brand .brand-logo { height: 48px; }
+.wa-avatar img { width: 40px; height: 40px; object-fit: contain; }
+@media (max-width: 600px) { .brand-logo { height: 34px; } }
+@media (max-width: 360px) { .brand-logo { height: 30px; } }
+@media (min-width: 2200px) { .brand-logo { height: 54px; } }
+.brand-logo { height: 48px; filter: drop-shadow(0 0 1px rgba(239,219,170,.55)) drop-shadow(0 0 10px rgba(239,219,170,.18)); }
+@media (max-width: 1366px) and (min-width: 1101px) { .brand-logo { height: 44px; } }
+@media (max-width: 600px) { .brand-logo { height: 36px; } }
+@media (max-width: 360px) { .brand-logo { height: 30px; } }
+@media (min-width: 2200px) { .brand-logo { height: 58px; } }
