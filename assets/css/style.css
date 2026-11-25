@@ -1113,3 +1113,5 @@ section { position: relative; }
 .map-dir svg { width: 15px; height: 15px; }
 .map-wrap .live-map { border-radius: 14px; }
 @media (max-width: 680px) { .live-map.ratio-21x9 { aspect-ratio: 4/3; } }
+.map-wrap .region b { color: var(--white) !important; }
+.map-wrap .region { align-items: flex-start; gap: 16px; }
