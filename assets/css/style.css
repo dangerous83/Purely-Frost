@@ -969,3 +969,7 @@ section { position: relative; }
 .photo.founders figcaption b { font-family: var(--font-display); font-size: 20px; font-weight: 600; }
 .photo.founders figcaption span { font-size: 14px; color: rgba(233,247,255,.7); }
 @media (max-width: 600px) { .photo.founders figcaption { padding: 32px 16px 14px; } .photo.founders figcaption b { font-size: 17px; } }
+.site-footer h5.mt-2 { margin-top: 32px; }
+.footer-bottom { padding-top: 24px; padding-bottom: 24px; padding-left: 24px; padding-right: 24px; border-top: 0; position: relative; }
+.footer-bottom::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 1px; background: var(--line-dark); }
+@media (max-width: 600px) { .footer-bottom { padding-left: 16px; padding-right: 16px; } .footer-bottom::before { left: 16px; right: 16px; } }
