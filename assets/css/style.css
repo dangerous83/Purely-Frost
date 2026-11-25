@@ -821,3 +821,49 @@ section { position: relative; }
   .gallery { grid-auto-rows: 320px; }
   .section { padding: 180px 0; }
 }
+
+/* ---------- Hero photo ---------- */
+.hero-photo { background: var(--ink); }
+.hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% center; transform: scale(1.06); animation: heroZoom 18s var(--ease) forwards; }
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3,13,24,.96) 0%, rgba(3,13,24,.88) 32%, rgba(5,26,46,.55) 58%, rgba(5,26,46,.15) 100%),
+    linear-gradient(0deg, rgba(3,13,24,.85) 0%, rgba(3,13,24,0) 35%),
+    linear-gradient(180deg, rgba(3,13,24,.7) 0%, rgba(3,13,24,0) 22%),
+    radial-gradient(700px 500px at 85% 20%, rgba(30,144,255,.22), transparent 60%);
+}
+@keyframes heroZoom { to { transform: scale(1); } }
+.hero-photo #frost-canvas { z-index: 1; opacity: .7; }
+.hero-photo .hero-visual { align-self: stretch; min-height: 420px; }
+.hero-photo .hero-card { display: none; }
+.hero-photo .chip-a { left: auto; right: 34%; top: 18%; }
+.hero-photo .chip-b { right: 0; bottom: 6%; }
+.hero-photo .scroll-cue { z-index: 2; }
+@media (max-width: 1000px) {
+  .hero-bg img { object-position: 60% center; }
+  .hero-bg::after { background: linear-gradient(180deg, rgba(3,13,24,.82), rgba(3,13,24,.94) 60%, var(--ink)); }
+  .hero-photo .hero-visual { min-height: 0; }
+  .hero-photo .hero-card { display: block; padding: 10px; }
+  .hero-photo .hero-card img { border-radius: 18px; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+  .hero-photo .chip-a { right: auto; left: -8px; top: -18px; }
+  .hero-photo .chip-b { right: -8px; bottom: -18px; }
+  .hero-photo .hero-visual { max-width: 640px; margin-top: 24px; }
+}
+@media (max-width: 600px) {
+  .hero-photo .chip-a { left: 0; } .hero-photo .chip-b { right: 0; }
+}
+@media (min-width: 1001px) {
+  .hero-bg { left: 38%; }
+  .hero-bg img { object-position: 30% center; }
+  .hero-bg::after {
+    background:
+      linear-gradient(90deg, var(--ink) 0%, rgba(3,13,24,.75) 14%, rgba(3,13,24,.2) 38%, rgba(3,13,24,0) 70%),
+      linear-gradient(0deg, rgba(3,13,24,.9) 0%, rgba(3,13,24,0) 30%),
+      linear-gradient(180deg, rgba(3,13,24,.75) 0%, rgba(3,13,24,0) 25%);
+  }
+  .hero-photo .chip-a { right: auto; left: 8%; top: 12%; }
+  .hero-photo .chip-b { right: -2%; bottom: 4%; }
+}
+@media (max-width: 1000px) { .hero-photo .scroll-cue { display: none; } }
