@@ -887,3 +887,26 @@ section { position: relative; }
 .stack-ph .photo.ph-small { position: absolute; width: 42%; right: -6%; bottom: -10%; border: 6px solid var(--white); }
 @media (max-width: 1100px) { .stack-ph .photo.ph-small { right: 0; } }
 @media (max-width: 600px) { .stack-ph .photo.ph-small { width: 46%; border-width: 4px; bottom: -14%; } .stack-ph { margin-bottom: 40px; } }
+
+/* ---------- Legal pages ---------- */
+.legal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+.legal-toc { position: sticky; top: 110px; padding: 24px; border-radius: var(--radius); background: var(--white); border: 1px solid var(--line); }
+.legal-toc h5 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin: 0 0 14px; font-weight: 500; }
+.legal-toc nav { display: grid; gap: 2px; max-height: 56vh; overflow-y: auto; }
+.legal-toc nav a { padding: 8px 10px; border-radius: 8px; font-size: 14px; color: var(--muted); }
+.legal-toc nav a:hover { background: var(--frost); color: var(--blue); }
+.legal-toc .btn { width: 100%; margin-top: 18px; }
+.legal-body { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: clamp(28px, 4vw, 56px); max-width: 860px; }
+.legal-sec { scroll-margin-top: 110px; }
+.legal-sec + .legal-sec { margin-top: 44px; padding-top: 44px; border-top: 1px solid var(--line); }
+.legal-sec h2 { font-size: clamp(22px, 2.2vw, 28px); font-weight: 600; margin-bottom: 16px; }
+.legal-sec p, .legal-sec li { color: #3c5068; font-size: 16px; line-height: 1.75; }
+.legal-sec ul { padding-left: 22px; margin: 0 0 1em; display: grid; gap: 6px; }
+.legal-sec li::marker { color: var(--blue); }
+.legal-sec a { color: var(--blue); font-weight: 600; word-break: break-word; }
+.legal-sec b { color: var(--text); }
+.legal-card { padding: 20px 24px; border-radius: 14px; background: var(--mist); border: 1px solid var(--line); }
+.legal-card p { margin: 0; }
+@media (max-width: 900px) { .legal-layout { grid-template-columns: 1fr; gap: 24px; } .legal-toc { position: static; } .legal-toc nav { max-height: none; grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .legal-toc nav { grid-template-columns: 1fr; } .legal-body { border-radius: 18px; padding: 22px 18px; } }
+@media (min-width: 2200px) { .legal-sec p, .legal-sec li { font-size: 19px; } .legal-body { max-width: 1060px; } .legal-layout { grid-template-columns: 340px 1fr; } }

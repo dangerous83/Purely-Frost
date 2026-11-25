@@ -17,6 +17,8 @@ Static, 12-page marketing site for Purely Frost (formerly Purely Freeze). No bui
 | `invest.html` | Invest |
 | `faq.html` | FAQ |
 | `contact.html` | Contact & Get a Quote |
+| `privacy.html` | Privacy Policy |
+| `terms.html` | Terms & Conditions |
 
 ## Replacing image placeholders
 Every image spot is a `<div class="ph ...">` block labelled with what belongs there and a suggested size. To swap in a photo, replace the whole `<div class="ph ...">…</div>` with:
