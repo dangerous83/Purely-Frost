@@ -910,3 +910,56 @@ section { position: relative; }
 @media (max-width: 900px) { .legal-layout { grid-template-columns: 1fr; gap: 24px; } .legal-toc { position: static; } .legal-toc nav { max-height: none; grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .legal-toc nav { grid-template-columns: 1fr; } .legal-body { border-radius: 18px; padding: 22px 18px; } }
 @media (min-width: 2200px) { .legal-sec p, .legal-sec li { font-size: 19px; } .legal-body { max-width: 1060px; } .legal-layout { grid-template-columns: 340px 1fr; } }
+
+/* ---------- Plant tour video ---------- */
+.tour-section { background: radial-gradient(900px 600px at 15% 50%, rgba(30,144,255,.28), transparent 60%), linear-gradient(160deg, var(--ink), var(--abyss) 60%, var(--navy)); color: var(--frost); overflow: hidden; }
+.tour-section .lead { color: rgba(233,247,255,.72); }
+.tour-section .index-tag { color: var(--ice); }
+.tour-section .btn-outline { background: transparent; color: var(--white); border-color: rgba(168,230,255,.35); }
+.tour-section .btn-outline:hover { border-color: var(--ice); background: rgba(95,212,255,.1); }
+.tour-glow { position: absolute; width: 520px; height: 520px; left: 8%; top: 50%; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(95,212,255,.25), transparent 65%); filter: blur(20px); pointer-events: none; }
+.tour-grid { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; position: relative; }
+.tour-media { position: relative; justify-self: center; width: 100%; max-width: 420px; }
+.tour-phone { position: relative; aspect-ratio: 9/16; border-radius: 34px; overflow: hidden; background: #000; border: 1px solid rgba(168,230,255,.25); box-shadow: 0 0 0 10px rgba(255,255,255,.03), 0 50px 100px -30px rgba(0,0,0,.7), 0 0 80px -20px rgba(30,144,255,.5); }
+.tour-video { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+.tour-badge { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: rgba(3,13,24,.6); backdrop-filter: blur(10px); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff4d5e; box-shadow: 0 0 0 0 rgba(255,77,94,.6); animation: live 1.8s infinite; }
+@keyframes live { 70% { box-shadow: 0 0 0 8px rgba(255,77,94,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,94,0); } }
+.tour-sound { position: absolute; top: 14px; right: 14px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(95,212,255,.4); background: rgba(3,13,24,.65); backdrop-filter: blur(10px); color: var(--white); font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+.tour-sound:hover { background: rgba(30,144,255,.5); border-color: var(--ice); }
+.tour-sound svg { width: 16px; height: 16px; }
+.tour-sound .ic-on, .tour-sound[aria-pressed="true"] .ic-off, .tour-sound[aria-pressed="true"] .lbl { display: none; }
+.tour-sound[aria-pressed="true"] .ic-on { display: block; }
+.tour-sound[aria-pressed="false"] { animation: nudge 2.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 85%, 100% { transform: none; } 90% { transform: scale(1.06); } }
+.tour-controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 40px 16px 16px; background: linear-gradient(transparent, rgba(3,13,24,.85)); }
+.tour-play { width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; border: 0; background: var(--white); color: var(--ink); display: grid; place-items: center; }
+.tour-play svg { width: 16px; height: 16px; }
+.tour-play .ic-play, .tour-phone.paused .tour-play .ic-pause { display: none; }
+.tour-phone.paused .tour-play .ic-play { display: block; }
+.tour-progress { flex: 1; height: 4px; border-radius: 4px; background: rgba(255,255,255,.22); overflow: hidden; cursor: pointer; }
+.tour-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--azure), var(--ice)); }
+.tour-time { font-size: 11px; color: rgba(255,255,255,.8); min-width: 32px; text-align: right; }
+.tour-chip { left: -56px; bottom: 22%; }
+.chapters { list-style: none; padding: 0; margin: 36px 0 0; display: grid; gap: 8px; }
+.chapters button { width: 100%; display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line-dark); background: rgba(255,255,255,.02); color: var(--frost); text-align: left; transition: background .3s, border-color .3s, transform .3s var(--ease); }
+.chapters button:hover { border-color: rgba(95,212,255,.45); background: rgba(95,212,255,.06); transform: translateX(4px); }
+.chapters button.active { border-color: var(--ice); background: linear-gradient(90deg, rgba(95,212,255,.14), rgba(95,212,255,.02)); }
+.chapters .ts { font-family: var(--font-mono); font-size: 13px; color: var(--ice); letter-spacing: .08em; }
+.chapters b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--white); }
+.chapters small { display: block; font-size: 13.5px; color: rgba(233,247,255,.58); margin-top: 2px; }
+@media (max-width: 1000px) {
+  .tour-grid { grid-template-columns: 1fr; }
+  .tour-media { max-width: 360px; order: 0; }
+  .tour-copy { order: 1; }
+  .tour-chip { left: -14px; }
+  .tour-glow { left: 50%; top: 22%; transform: translate(-50%, -50%); }
+}
+@media (max-width: 600px) {
+  .tour-media { max-width: 300px; }
+  .tour-phone { border-radius: 26px; }
+  .tour-chip { left: -8px; bottom: 18%; }
+  .chapters button { grid-template-columns: 48px 1fr; padding: 14px; gap: 10px; }
+}
+@media (min-width: 2200px) { .tour-grid { grid-template-columns: 520px 1fr; } .tour-media { max-width: 520px; } .chapters b { font-size: 21px; } .chapters small { font-size: 16px; } }
+@media (max-width: 600px) { .tour-badge { display: none; } }
