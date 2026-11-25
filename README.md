@@ -11,7 +11,6 @@ Static, 12-page marketing site for FPH Ice Plant (formerly Purely Freeze), a Fou
 | `products.html` | Products |
 | `purity.html` | Purity & Process |
 | `facility.html` | Production Facility |
-| `gallery.html` | Facility Gallery (filter + lightbox) |
 | `distribution.html` | Distribution Network |
 | `distributors.html` | Distributor Program (Silver / Gold / Platinum) |
 | `invest.html` | Invest |
