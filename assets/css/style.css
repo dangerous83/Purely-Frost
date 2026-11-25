@@ -983,3 +983,7 @@ section { position: relative; }
 .page-hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,13,24,.92) 0%, rgba(3,13,24,.7) 38%, rgba(3,13,24,.15) 75%), linear-gradient(180deg, rgba(3,13,24,.7) 0%, transparent 30%, transparent 70%, rgba(3,13,24,.6) 100%); }
 .page-hero.has-photo::before { opacity: .25; }
 @media (max-width: 800px) { .page-hero-bg::after { background: linear-gradient(180deg, rgba(3,13,24,.85), rgba(3,13,24,.75)); } }
+.page-hero.has-photo .lead { color: rgba(233,247,255,.9); max-width: 560px; text-shadow: 0 2px 18px rgba(3,13,24,.8); }
+.page-hero.has-photo .meta-pill { background: rgba(3,13,24,.55); backdrop-filter: blur(6px); }
+.page-hero-bg::after { background: linear-gradient(90deg, rgba(3,13,24,.95) 0%, rgba(3,13,24,.82) 34%, rgba(3,13,24,.35) 62%, rgba(3,13,24,.1) 85%), linear-gradient(180deg, rgba(3,13,24,.7) 0%, transparent 30%, transparent 70%, rgba(3,13,24,.6) 100%); }
+@media (max-width: 800px) { .page-hero-bg::after { background: linear-gradient(180deg, rgba(3,13,24,.88), rgba(3,13,24,.8)); } }
