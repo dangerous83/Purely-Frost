@@ -28,7 +28,7 @@ Every image spot is a `<div class="ph ...">` block labelled with what belongs th
 ```
 
 ## Before going live
-- Confirm emails (`@fphiceplant.com`), phone, address and social links.
+- Confirm emails (` (now aronlopezilao@fourthpacificholdings.com, shown as an email icon)`), phone, address and social links.
 - Connect the forms (contact, investor deck, newsletter) to a backend or form service such as Formspree or Netlify Forms. They currently validate input and show a thank-you message, but send nothing.
 - Replace placeholder leadership names, timeline phases, testimonial and certification badges.
 
