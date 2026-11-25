@@ -102,7 +102,7 @@
         f.y += f.s; f.d += 0.01; f.x += Math.sin(f.d) * 0.25;
         if (f.y > H + 5) { f.y = -5; f.x = Math.random() * W; }
         ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(200,238,255," + f.o + ")"; ctx.fill();
+        ctx.fillStyle = "rgba(239,219,170," + f.o + ")"; ctx.fill();
       }
       raf = requestAnimationFrame(draw);
     }
