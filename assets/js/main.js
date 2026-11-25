@@ -298,6 +298,41 @@
     if (reduceMotion) setPaused(true);
   }
 
+  /* WhatsApp widget */
+  var wa = document.querySelector(".wa-widget");
+  if (wa) {
+    var waBtn = wa.querySelector(".wa-launch");
+    var waPanel = wa.querySelector(".wa-panel");
+    var waText = wa.querySelector("#wa-msg");
+    var waNum = wa.getAttribute("data-wa");
+    function waSet(open) {
+      wa.classList.toggle("wa-open", open);
+      document.body.classList.toggle("wa-is-open", open);
+      waBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      waBtn.setAttribute("aria-label", open ? "Close chat" : "Chat with us on WhatsApp");
+      if (open) { waPanel.hidden = false; setTimeout(function () { waText.focus({ preventScroll: true }); }, reduceMotion ? 0 : 700); }
+      else if (wa.contains(document.activeElement)) { waBtn.focus(); }
+    }
+    waBtn.addEventListener("click", function () { waSet(!wa.classList.contains("wa-open")); });
+    wa.querySelector(".wa-x").addEventListener("click", function () { waSet(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && wa.classList.contains("wa-open")) waSet(false); });
+    document.addEventListener("click", function (e) { if (wa.classList.contains("wa-open") && !wa.contains(e.target)) waSet(false); });
+    wa.querySelectorAll(".wa-chips button").forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        wa.querySelectorAll(".wa-chips button").forEach(function (c) { c.classList.remove("on"); });
+        chip.classList.add("on");
+        waText.value = chip.getAttribute("data-msg");
+        waText.focus();
+      });
+    });
+    waText.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); wa.querySelector(".wa-form").requestSubmit(); } });
+    wa.querySelector(".wa-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var msg = waText.value.trim() || "Hi FPH Ice Plant! I'd like to know more about your ice products.";
+      window.open("https://wa.me/" + waNum + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    });
+  }
+
   /* Footer year */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
