@@ -963,3 +963,9 @@ section { position: relative; }
 }
 @media (min-width: 2200px) { .tour-grid { grid-template-columns: 520px 1fr; } .tour-media { max-width: 520px; } .chapters b { font-size: 21px; } .chapters small { font-size: 16px; } }
 @media (max-width: 600px) { .tour-badge { display: none; } }
+.photo.founders { margin: 0; background: #1a1a1a; }
+.photo.founders figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 24px 20px; background: linear-gradient(transparent, rgba(3,13,24,.85)); color: var(--white); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.photo.founders figcaption small { width: 100%; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ice); }
+.photo.founders figcaption b { font-family: var(--font-display); font-size: 20px; font-weight: 600; }
+.photo.founders figcaption span { font-size: 14px; color: rgba(233,247,255,.7); }
+@media (max-width: 600px) { .photo.founders figcaption { padding: 32px 16px 14px; } .photo.founders figcaption b { font-size: 17px; } }
