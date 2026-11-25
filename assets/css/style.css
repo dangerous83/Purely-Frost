@@ -975,3 +975,11 @@ section { position: relative; }
 @media (max-width: 600px) { .footer-bottom { padding-left: 16px; padding-right: 16px; } .footer-bottom::before { left: 16px; right: 16px; } }
 .brand-name em { font-style: normal; color: var(--ice); font-weight: 600; }
 .brand-name small { letter-spacing: .16em; font-size: 9px; }
+
+/* ---------- Inner page hero with photo ---------- */
+.page-hero.has-photo { background: var(--ink); }
+.page-hero-bg { position: absolute; inset: 0; }
+.page-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% center; }
+.page-hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,13,24,.92) 0%, rgba(3,13,24,.7) 38%, rgba(3,13,24,.15) 75%), linear-gradient(180deg, rgba(3,13,24,.7) 0%, transparent 30%, transparent 70%, rgba(3,13,24,.6) 100%); }
+.page-hero.has-photo::before { opacity: .25; }
+@media (max-width: 800px) { .page-hero-bg::after { background: linear-gradient(180deg, rgba(3,13,24,.85), rgba(3,13,24,.75)); } }
