@@ -31,3 +31,6 @@ Every image spot is a `<div class="ph ...">` block labelled with what belongs th
 - Confirm emails (`@fphiceplant.com`), phone, address and social links.
 - Connect the forms (contact, investor deck, newsletter) to a backend or form service such as Formspree or Netlify Forms. They currently validate input and show a thank-you message, but send nothing.
 - Replace placeholder leadership names, timeline phases, testimonial and certification badges.
+
+## Clean URLs
+Pages are linked without `.html` (e.g. `https://fphiceplant.com/about`). GitHub Pages serves `about.html` for `/about` automatically. Asset paths start with `/`, so the site must be served from the domain root.

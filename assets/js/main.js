@@ -3,6 +3,12 @@
   "use strict";
   var doc = document.documentElement;
   doc.classList.remove("no-js");
+
+  /* Live site: show clean URLs (fphiceplant.com/about instead of /about.html or /index.html) */
+  if (/(^|\.)fphiceplant\.com$/.test(location.hostname) && /(\/index)?\.html$/.test(location.pathname)) {
+    var cleanPath = location.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+    history.replaceState(null, "", cleanPath + location.search + location.hash);
+  }
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* Header state on scroll + back-to-top */
