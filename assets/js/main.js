@@ -140,6 +140,12 @@
           out.querySelector("[data-f=use]").textContent = p.getAttribute("data-use");
           out.querySelector("[data-f=pack]").textContent = p.getAttribute("data-pack");
         }
+        var sig = document.querySelector(".prod-img.signature img");
+        var src = p.getAttribute("data-img");
+        if (sig) {
+          sig.parentElement.classList.toggle("no-photo", !src);
+          if (src) { sig.src = src; sig.alt = "Purely Frost purified tube ice, " + p.getAttribute("data-name") + " bag"; }
+        }
       });
     });
   });

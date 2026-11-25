@@ -867,3 +867,15 @@ section { position: relative; }
   .hero-photo .chip-b { right: -2%; bottom: 4%; }
 }
 @media (max-width: 1000px) { .hero-photo .scroll-cue { display: none; } }
+
+/* ---------- Product photos ---------- */
+.prod-img { position: relative; overflow: hidden; border-radius: var(--radius); background: linear-gradient(180deg, #e3eefb, #d3e3f6); }
+.prod-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; transition: transform .8s var(--ease); }
+.card:hover .prod-img img { transform: scale(1.05); }
+.product-card .prod-img { border-radius: 0; aspect-ratio: 4/3; }
+.prod-img.signature { box-shadow: var(--shadow); }
+.prod-img.signature img { object-fit: contain; object-position: center; transition: opacity .3s; }
+.prod-img.no-photo img { opacity: .25; filter: grayscale(1); }
+.prod-img.no-photo::after { content: "Photo coming soon"; position: absolute; inset: auto 0 24px; text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--deep); }
+.prod-img.signature { aspect-ratio: 1349 / 1166; }
+.prod-img.signature img { object-fit: cover; }
