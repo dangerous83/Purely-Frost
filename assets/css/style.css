@@ -1301,3 +1301,18 @@ body.cm-lock { overflow: hidden; }
 .cm-panel::-webkit-scrollbar { width: 6px; } .cm-panel::-webkit-scrollbar-thumb { background: rgba(202,173,115,.5); border-radius: 3px; } .cm-panel::-webkit-scrollbar-track { background: transparent; }
 .cyber-modal.is-done .cm-boot, .cyber-modal.is-done #cm-title, .cyber-modal.is-done #cm-title + .cm-sub { display: none; }
 .send-error { margin: 12px 0 0; font-size: 13.5px; color: #e0475c; text-align: center; } .send-error a { color: inherit; text-decoration: underline; } .cyber-modal .send-error { color: #ff8b99; } button[aria-busy="true"] { opacity: .75; cursor: progress; }
+
+/* Mobile menu: header blur traps the fixed drawer inside the header once scrolled — drop it while the menu is open */
+@media (max-width: 1100px) {
+  .nav-open .site-header, .nav-open .site-header.scrolled { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: var(--abyss); }
+  .nav-links { padding-top: 88px; background: linear-gradient(180deg, #1d2547, var(--abyss) 40%); box-shadow: -30px 0 60px -20px rgba(0,0,0,.6); }
+  .nav-links::before { content: "Menu"; display: block; padding: 0 16px 10px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); opacity: .8; }
+  .nav-links > li:not(.mobile-cta) { border-bottom: 1px solid rgba(239,219,170,.08); }
+  .nav-links > li > a, .nav-links button.nav-drop { min-height: 54px; font-size: 14px; color: var(--frost); border-radius: 12px; }
+  .nav-links button.nav-drop svg { width: 16px; height: 16px; color: var(--gold); }
+  .has-drop.open > .nav-drop { color: var(--gold); background: rgba(202,173,115,.08); }
+  .has-drop.open .dropdown { animation: fadeUp .3s var(--ease); border: 1px solid rgba(202,173,115,.18); border-radius: 14px; padding: 6px; }
+  .dropdown a { color: var(--white); font-size: 15px; }
+  .dropdown a span { color: rgba(246,239,224,.55); }
+}
+@media (max-width: 1100px) { .nav-links .mobile-cta .btn-primary { background: linear-gradient(135deg, #e3c98f, var(--gold) 45%, var(--bronze)) !important; color: var(--ink) !important; justify-content: center; gap: 10px; border-radius: 999px; } }
