@@ -1300,3 +1300,4 @@ body.cm-lock { overflow: hidden; }
 .cm-panel { overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(202,173,115,.5) transparent; }
 .cm-panel::-webkit-scrollbar { width: 6px; } .cm-panel::-webkit-scrollbar-thumb { background: rgba(202,173,115,.5); border-radius: 3px; } .cm-panel::-webkit-scrollbar-track { background: transparent; }
 .cyber-modal.is-done .cm-boot, .cyber-modal.is-done #cm-title, .cyber-modal.is-done #cm-title + .cm-sub { display: none; }
+.send-error { margin: 12px 0 0; font-size: 13.5px; color: #e0475c; text-align: center; } .send-error a { color: inherit; text-decoration: underline; } .cyber-modal .send-error { color: #ff8b99; } button[aria-busy="true"] { opacity: .75; cursor: progress; }

@@ -211,7 +211,48 @@
     });
   });
 
-  /* Forms: client-side validation + success state (connect to a backend later) */
+  /* Email delivery: every website form is sent to the FPH inbox via FormSubmit */
+  var LEAD_EMAIL = "aronlopezilao@fourthpacificholdings.com";
+  function sendEmail(subject, data) {
+    var payload = { _subject: subject + " — fphiceplant.com", _template: "table", _captcha: "false", Page: location.href };
+    Object.keys(data).forEach(function (k) { if (data[k]) payload[k] = data[k]; });
+    if (data.Email) payload._replyto = data.Email;
+    return fetch("https://formsubmit.co/ajax/" + LEAD_EMAIL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || String(j.success) === "false") throw new Error(j.message || "send failed"); return j; }); });
+  }
+  function formData(form) {
+    var out = {};
+    form.querySelectorAll("input, select, textarea").forEach(function (el) {
+      if (!el.name || el.type === "checkbox" || el.type === "submit") return;
+      if (el.type === "radio" && !el.checked) return;
+      if (el.tagName === "SELECT" && el.value === "") return;
+      var label = el.getAttribute("data-label");
+      if (!label) {
+        var lab = el.id && form.querySelector("label[for='" + el.id + "']");
+        label = lab ? lab.textContent.replace(/\*/g, "").trim() : el.name.charAt(0).toUpperCase() + el.name.slice(1);
+      }
+      var v = el.tagName === "SELECT" ? (el.options[el.selectedIndex] || {}).text || el.value : el.value;
+      if (el.type === "radio") { var s = el.closest("label"); v = s ? s.querySelector("span").firstChild.textContent.trim() : el.value; }
+      if (el.type === "email") label = "Email";
+      out[label] = (v || "").trim();
+    });
+    return out;
+  }
+  function setBusy(btn, busy, text) {
+    if (!btn) return;
+    if (busy) { btn.disabled = true; btn.setAttribute("aria-busy", "true"); btn._html = btn.innerHTML; btn.textContent = text || "Sending…"; }
+    else { btn.disabled = false; btn.removeAttribute("aria-busy"); if (btn._html) btn.innerHTML = btn._html; }
+  }
+  function sendFailed(form) {
+    var box = form.querySelector(".send-error");
+    if (!box) { box = document.createElement("p"); box.className = "send-error"; box.setAttribute("role", "alert"); form.appendChild(box); }
+    box.innerHTML = 'Sorry — your message could not be sent. Please email us at <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a>.';
+  }
+
+  /* Forms: client-side validation, then email */
   document.querySelectorAll("form[data-validate]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -224,8 +265,12 @@
         if (!valid && ok) { input.focus(); ok = false; }
       });
       if (!ok) return;
-      var success = form.parentElement.querySelector(".form-success");
-      if (success) { form.style.display = "none"; success.classList.add("show"); success.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }); }
+      var btn = form.querySelector("[type=submit]");
+      setBusy(btn, true);
+      sendEmail(form.getAttribute("data-subject") || "Website Inquiry", formData(form)).then(function () {
+        var success = form.parentElement.querySelector(".form-success");
+        if (success) { form.style.display = "none"; success.classList.add("show"); success.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }); }
+      }).catch(function () { setBusy(btn, false); sendFailed(form); });
     });
     form.querySelectorAll("input, select, textarea").forEach(function (el) {
       el.addEventListener("input", function () { var f = el.closest(".field"); if (f) f.classList.remove("invalid"); });
@@ -238,7 +283,14 @@
       e.preventDefault();
       var input = f.querySelector("input");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) { input.focus(); return; }
-      f.innerHTML = '<span style="padding:10px 14px;color:var(--ice);font-size:14px">Thank you — you are subscribed.</span>';
+      var btn = f.querySelector("button");
+      if (btn) btn.disabled = true;
+      sendEmail("Newsletter Signup", { Email: input.value.trim() }).then(function () {
+        f.innerHTML = '<span style="padding:10px 14px;color:var(--ice);font-size:14px">Thank you — you are subscribed.</span>';
+      }).catch(function () {
+        if (btn) btn.disabled = false;
+        f.insertAdjacentHTML("afterend", '<p class="send-error">Could not subscribe — please email <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a>.</p>');
+      });
     });
   });
 
@@ -333,8 +385,7 @@
     });
   }
 
-  /* Lead forms (facility tour card + secure quote modal): validate, then hand the lead to WhatsApp */
-  var leadWa = (wa && wa.getAttribute("data-wa")) || "971561643886";
+  /* Lead forms (facility tour card + secure quote modal): validate, then email the lead */
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function validateLead(form) {
     var first = null;
@@ -348,25 +399,18 @@
     if (first) first.focus();
     return !first;
   }
-  function leadMessage(form) {
-    var lines = ["*" + form.getAttribute("data-lead") + "* — fphiceplant.com"];
-    form.querySelectorAll("[data-label]").forEach(function (el) {
-      var v = el.value.trim();
-      if (v) lines.push(el.getAttribute("data-label") + ": " + v);
-    });
-    return lines.join("\n");
-  }
-  function sendLead(form) {
-    window.open("https://wa.me/" + leadWa + "?text=" + encodeURIComponent(leadMessage(form)), "_blank", "noopener");
-  }
+  function sendLead(form) { return sendEmail(form.getAttribute("data-lead"), formData(form)); }
   document.querySelectorAll("form.lead-form").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validateLead(form)) return;
-      sendLead(form);
-      var done = form.parentElement.querySelector(".lead-done");
-      form.hidden = true;
-      if (done) done.hidden = false;
+      var btn = form.querySelector("[type=submit]");
+      setBusy(btn, true);
+      sendLead(form).then(function () {
+        var done = form.parentElement.querySelector(".lead-done");
+        form.hidden = true;
+        if (done) done.hidden = false;
+      }).catch(function () { setBusy(btn, false); sendFailed(form); });
     });
     form.addEventListener("input", function (e) { var f = e.target.closest(".field"); if (f) f.classList.remove("invalid"); });
   });
@@ -398,13 +442,13 @@
               '<div class="field full"><label for="cm-msg">07 // Notes</label><textarea id="cm-msg" name="message" data-label="Notes" rows="3" placeholder="Delivery location, schedule, anything else (optional)"></textarea></div>' +
             '</div>' +
             '<button class="cm-submit" type="submit"><span>Transmit Request</span>' + arrow + '</button>' +
-            '<p class="cm-note">Your request opens in WhatsApp so it reaches our sales team directly.</p>' +
+            '<p class="cm-note">Sent straight to our sales team’s inbox.</p>' +
           '</form>' +
           '<div class="cm-done" hidden>' +
             '<div class="cm-progress"><i></i></div>' +
             '<div class="cm-done-code">REF <b data-cm-ref></b></div>' +
-            '<h3 class="cm-title">Request <span class="grad-text">ready to send</span></h3>' +
-            '<p class="cm-sub">Send the WhatsApp message that just opened. Our team will reply within 24 hours.</p>' +
+            '<h3 class="cm-title">Request <span class="grad-text">received</span></h3>' +
+            '<p class="cm-sub">Thank you — our sales team has your request and will reply within 24 hours. Keep your reference number for follow-ups.</p>' +
             '<button class="cm-submit ghost" type="button" data-cm-close><span>Close</span></button>' +
           '</div>' +
         '</div>' +
@@ -443,10 +487,16 @@
     cmForm.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validateLead(cmForm)) return;
-      sendLead(cmForm);
-      cm.querySelector("[data-cm-ref]").textContent = "FPH-" + Date.now().toString(36).toUpperCase().slice(-6);
-      cmForm.hidden = true; cmDone.hidden = false; cm.classList.add("is-done");
-      cmDone.querySelector(".cm-submit").focus({ preventScroll: true });
+      var btn = cmForm.querySelector("[type=submit]");
+      var ref = "FPH-" + Date.now().toString(36).toUpperCase().slice(-6);
+      var data = formData(cmForm); data.Reference = ref;
+      setBusy(btn, true, "Transmitting…");
+      sendEmail(cmForm.getAttribute("data-lead"), data).then(function () {
+        setBusy(btn, false);
+        cm.querySelector("[data-cm-ref]").textContent = ref;
+        cmForm.hidden = true; cmDone.hidden = false; cm.classList.add("is-done");
+        cmDone.querySelector(".cm-submit").focus({ preventScroll: true });
+      }).catch(function () { setBusy(btn, false); sendFailed(cmForm); });
     });
     if (/[?&]quote=1\b/.test(location.search)) cmOpen();
   }
