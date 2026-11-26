@@ -333,6 +333,124 @@
     });
   }
 
+  /* Lead forms (facility tour card + secure quote modal): validate, then hand the lead to WhatsApp */
+  var leadWa = (wa && wa.getAttribute("data-wa")) || "971561643886";
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function validateLead(form) {
+    var first = null;
+    form.querySelectorAll("[required]").forEach(function (input) {
+      var v = input.value.trim();
+      var ok = input.type === "email" ? emailRe.test(v) : v !== "";
+      var f = input.closest(".field");
+      if (f) f.classList.toggle("invalid", !ok);
+      if (!ok && !first) first = input;
+    });
+    if (first) first.focus();
+    return !first;
+  }
+  function leadMessage(form) {
+    var lines = ["*" + form.getAttribute("data-lead") + "* — fphiceplant.com"];
+    form.querySelectorAll("[data-label]").forEach(function (el) {
+      var v = el.value.trim();
+      if (v) lines.push(el.getAttribute("data-label") + ": " + v);
+    });
+    return lines.join("\n");
+  }
+  function sendLead(form) {
+    window.open("https://wa.me/" + leadWa + "?text=" + encodeURIComponent(leadMessage(form)), "_blank", "noopener");
+  }
+  document.querySelectorAll("form.lead-form").forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!validateLead(form)) return;
+      sendLead(form);
+      var done = form.parentElement.querySelector(".lead-done");
+      form.hidden = true;
+      if (done) done.hidden = false;
+    });
+    form.addEventListener("input", function (e) { var f = e.target.closest(".field"); if (f) f.classList.remove("invalid"); });
+  });
+
+  /* Secure quote modal (built on demand for any [data-lead-open] button) */
+  var openers = document.querySelectorAll("[data-lead-open]");
+  if (openers.length) {
+    var arrow = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    var cm = document.createElement("div");
+    cm.className = "cyber-modal";
+    cm.hidden = true;
+    cm.innerHTML =
+      '<div class="cm-backdrop" data-cm-close></div>' +
+      '<div class="cm-panel" role="dialog" aria-modal="true" aria-labelledby="cm-title">' +
+        '<i class="cm-corner tl"></i><i class="cm-corner tr"></i><i class="cm-corner bl"></i><i class="cm-corner br"></i>' +
+        '<div class="cm-bar"><span class="cm-lights"><i></i><i></i><i></i></span><span class="cm-path">FPH://SECURE-QUOTE</span><span class="cm-status"><i class="dot"></i>HTTPS · SECURE</span><button class="cm-x" type="button" data-cm-close aria-label="Close">&times;</button></div>' +
+        '<div class="cm-body">' +
+          '<div class="cm-boot" aria-hidden="true"><div>&gt; establishing secure channel<span class="ok">OK</span></div><div>&gt; loading quote module<span class="ok">OK</span></div><div class="cm-type">&gt; awaiting your request_<span class="cm-caret"></span></div></div>' +
+          '<h2 class="cm-title" id="cm-title">Request a <span class="grad-text">priority quote</span></h2>' +
+          '<p class="cm-sub">Tell us what you need — our team replies within 24 hours with pricing and delivery options.</p>' +
+          '<form class="cm-form" data-lead="Secure Quote Request" novalidate>' +
+            '<div class="cm-grid">' +
+              '<div class="field"><label for="cm-name">01 // Full name</label><input id="cm-name" name="name" data-label="Name" autocomplete="name" required placeholder="Juan Dela Cruz"><div class="err">Name required</div></div>' +
+              '<div class="field"><label for="cm-phone">02 // Mobile / WhatsApp</label><input id="cm-phone" name="phone" data-label="Phone" type="tel" autocomplete="tel" required placeholder="+63 9XX XXX XXXX"><div class="err">Number required</div></div>' +
+              '<div class="field"><label for="cm-email">03 // Email</label><input id="cm-email" name="email" data-label="Email" type="email" autocomplete="email" required placeholder="you@company.com"><div class="err">Valid email required</div></div>' +
+              '<div class="field"><label for="cm-company">04 // Business name</label><input id="cm-company" name="company" data-label="Business" autocomplete="organization" placeholder="Optional"></div>' +
+              '<div class="field"><label for="cm-type">05 // Inquiry</label><select id="cm-type" name="type" data-label="Inquiry"><option>Ice order</option><option>Become a distributor</option><option>Investment</option><option>Plant tour</option></select></div>' +
+              '<div class="field"><label for="cm-vol">06 // Volume</label><select id="cm-vol" name="volume" data-label="Volume"><option>Retail bags (1–5 KG)</option><option>Commercial (10–20 KG)</option><option>500 kg / day</option><option>2,000 kg / day</option><option>5,000+ kg / day</option><option>Bulk / metric ton</option></select></div>' +
+              '<div class="field full"><label for="cm-msg">07 // Notes</label><textarea id="cm-msg" name="message" data-label="Notes" rows="3" placeholder="Delivery location, schedule, anything else (optional)"></textarea></div>' +
+            '</div>' +
+            '<button class="cm-submit" type="submit"><span>Transmit Request</span>' + arrow + '</button>' +
+            '<p class="cm-note">Your request opens in WhatsApp so it reaches our sales team directly.</p>' +
+          '</form>' +
+          '<div class="cm-done" hidden>' +
+            '<div class="cm-progress"><i></i></div>' +
+            '<div class="cm-done-code">REF <b data-cm-ref></b></div>' +
+            '<h3 class="cm-title">Request <span class="grad-text">ready to send</span></h3>' +
+            '<p class="cm-sub">Send the WhatsApp message that just opened. Our team will reply within 24 hours.</p>' +
+            '<button class="cm-submit ghost" type="button" data-cm-close><span>Close</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(cm);
+    var cmForm = cm.querySelector(".cm-form");
+    var cmDone = cm.querySelector(".cm-done");
+    var lastFocus = null;
+    function cmOpen(opener) {
+      lastFocus = opener || document.activeElement;
+      cmForm.hidden = false; cmDone.hidden = true; cm.classList.remove("is-done");
+      cm.hidden = false;
+      requestAnimationFrame(function () { cm.classList.add("open"); });
+      document.body.classList.add("cm-lock");
+      setTimeout(function () { cm.querySelector("#cm-name").focus({ preventScroll: true }); }, reduceMotion ? 0 : 450);
+    }
+    function cmClose() {
+      cm.classList.remove("open");
+      document.body.classList.remove("cm-lock");
+      setTimeout(function () { cm.hidden = true; }, reduceMotion ? 0 : 300);
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    openers.forEach(function (b) { b.addEventListener("click", function () { cmOpen(b); }); });
+    cm.addEventListener("click", function (e) { if (e.target.closest("[data-cm-close]")) cmClose(); });
+    document.addEventListener("keydown", function (e) {
+      if (cm.hidden) return;
+      if (e.key === "Escape") cmClose();
+      if (e.key === "Tab") {
+        var f = Array.prototype.filter.call(cm.querySelectorAll("button, input, select, textarea"), function (el) { return el.offsetParent !== null; });
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+    cmForm.addEventListener("input", function (e) { var f = e.target.closest(".field"); if (f) f.classList.remove("invalid"); });
+    cmForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!validateLead(cmForm)) return;
+      sendLead(cmForm);
+      cm.querySelector("[data-cm-ref]").textContent = "FPH-" + Date.now().toString(36).toUpperCase().slice(-6);
+      cmForm.hidden = true; cmDone.hidden = false; cm.classList.add("is-done");
+      cmDone.querySelector(".cm-submit").focus({ preventScroll: true });
+    });
+    if (/[?&]quote=1\b/.test(location.search)) cmOpen();
+  }
+
   /* Footer year */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

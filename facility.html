@@ -38,7 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=phones1">
+<link rel="stylesheet" href="/assets/css/style.css?v=lead1">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -141,13 +141,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <section class="section-sm"><div class="container">
-  <div class="cta-band reveal">
-    <div class="eyebrow light">Let’s Build Together</div>
-    <h2 class="h2">Visit our facility</h2>
-    <p>Schedule a plant tour for distributors, partners and investors.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="/contact?interest=tour#quote">Book a Plant Tour <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-ghost" href="/contact">Contact Us</a>
+  <div class="lead-cta reveal" id="tour">
+    <div class="lead-cta-copy">
+      <div class="eyebrow light">Let’s Build Together</div>
+      <h2 class="h2">See tube ice made <span class="grad-text">live.</span></h2>
+      <p>Book a guided plant tour in Sto. Tomas, Batangas — built for distributors, business partners and investors who want to see our process first-hand.</p>
+      <ul class="lead-perks">
+        <li><b>01</b><span>Walk the production floor<small>Tube ice machines, RO treatment and bagging line</small></span></li>
+        <li><b>02</b><span>Meet the operations team<small>Capacity, delivery schedules and quality checks</small></span></li>
+        <li><b>03</b><span>Get a partner briefing<small>Distributor tiers, pricing and investment options</small></span></li>
+      </ul>
+      <div class="lead-trust"><span><i class="dot"></i>Tours Mon – Fri · 8:00 AM – 5:00 PM</span><span>Reply within 24 hours</span></div>
+    </div>
+    <div class="lead-cta-card">
+      <form class="lead-form" data-lead="Plant Tour Request" novalidate>
+        <div class="lead-card-head"><span class="mono">Request a Plant Tour</span><span class="lead-slots"><i class="dot"></i>Takes 1 minute</span></div>
+        <div class="lead-grid">
+          <div class="field"><label for="t-name">Full name</label><input id="t-name" name="name" data-label="Name" autocomplete="name" required placeholder="Juan Dela Cruz"><div class="err">Please enter your name.</div></div>
+          <div class="field"><label for="t-phone">Mobile / WhatsApp</label><input id="t-phone" name="phone" data-label="Phone" type="tel" autocomplete="tel" required placeholder="+63 9XX XXX XXXX"><div class="err">Please enter your number.</div></div>
+          <div class="field"><label for="t-email">Email</label><input id="t-email" name="email" data-label="Email" type="email" autocomplete="email" required placeholder="you@company.com"><div class="err">Please enter a valid email.</div></div>
+          <div class="field"><label for="t-role">I am a</label><select id="t-role" name="role" data-label="Visitor type"><option>Distributor / Reseller</option><option>Business buyer</option><option>Investor</option><option>Partner / Supplier</option></select></div>
+          <div class="field full"><label for="t-date">Preferred visit date</label><input id="t-date" name="date" data-label="Preferred date" type="date"></div>
+        </div>
+        <button class="btn btn-primary lead-submit" type="submit">Book My Plant Tour <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="lead-note">Your request opens in WhatsApp so our team can confirm your slot directly.</p>
+      </form>
+      <div class="lead-done" hidden>
+        <div class="lead-done-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></div>
+        <h3 class="h3">Tour request ready</h3>
+        <p>Send the WhatsApp message that just opened and our team will confirm your visit within 24 hours.</p>
+      </div>
     </div>
   </div>
 </div></section>
@@ -245,6 +268,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="wa-tip" aria-hidden="true">Chat with us</span>
   </button>
 </div>
-<script src="/assets/js/main.js?v=feaca2c9" defer></script>
+<script src="/assets/js/main.js?v=lead1" defer></script>
 </body>
 </html>
