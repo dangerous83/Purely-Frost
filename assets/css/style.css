@@ -1147,3 +1147,6 @@ section { position: relative; }
 @media (max-width: 360px) { .brand-logo { height: 30px; } }
 @media (min-width: 2200px) { .brand-logo { height: 58px; } }
 .site-header.scrolled, .site-header.solid { background: rgba(19,26,55,.97); }
+.page-hero-bg:has(img[src*="distribution-hero"]) { top: 110px; }
+.page-hero-bg img[src*="distribution-hero"] { object-position: right top; }
+@media (max-width: 800px) { .page-hero-bg:has(img[src*="distribution-hero"]) { top: 0; } }
