@@ -2,6 +2,15 @@
    FPH Ice Plant — Global Stylesheet
    ========================================================================== */
 
+/* Flag emoji font: Windows can't draw flag emoji (shows "SA", "AE"…),
+   so load Twemoji flags for flag characters only (CC-BY 4.0, Twitter/Twemoji). */
+@font-face {
+  font-family: "Twemoji Country Flags";
+  unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E007F;
+  src: url("https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1/dist/TwemojiCountryFlags.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   --ink: #131a37;
   --abyss: #1a2240;
@@ -22,9 +31,9 @@
   --platinum: #c9d6e3;
   --silver: #aeb8c2;
 
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: "Twemoji Country Flags", "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Twemoji Country Flags", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Twemoji Country Flags", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --radius: 18px;
   --radius-sm: 10px;
@@ -469,7 +478,7 @@ section { position: relative; }
 .region span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ice); }
 .flag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .flag { padding: 18px; border-radius: 14px; border: 1px solid var(--line-dark); text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--glacier); background: rgba(255,255,255,.02); }
-.flag em { display: block; font-style: normal; font-size: 26px; margin-bottom: 8px; }
+.flag em { display: block; font-style: normal; font-size: 40px; line-height: 1; margin-bottom: 10px; }
 @media (max-width: 520px) { .flag-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ---------- Tiers ---------- */
