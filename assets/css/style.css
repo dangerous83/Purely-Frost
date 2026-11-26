@@ -1146,3 +1146,4 @@ section { position: relative; }
 @media (max-width: 600px) { .brand-logo { height: 36px; } }
 @media (max-width: 360px) { .brand-logo { height: 30px; } }
 @media (min-width: 2200px) { .brand-logo { height: 58px; } }
+.site-header.scrolled, .site-header.solid { background: rgba(19,26,55,.97); }
