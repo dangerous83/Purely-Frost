@@ -929,6 +929,8 @@ section { position: relative; }
 .tour-section .index-tag { color: var(--ice); }
 .tour-section .btn-outline { background: transparent; color: var(--white); border-color: rgba(239,219,170,.35); }
 .tour-section .btn-outline:hover { border-color: var(--ice); background: rgba(202,173,115,.1); }
+.dark .btn-outline { background: transparent; color: var(--white); border-color: rgba(239,219,170,.35); }
+.dark .btn-outline:hover { border-color: var(--ice); background: rgba(202,173,115,.1); }
 .tour-glow { position: absolute; width: 520px; height: 520px; left: 8%; top: 50%; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(202,173,115,.25), transparent 65%); filter: blur(20px); pointer-events: none; }
 .tour-grid { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: clamp(48px, 7vw, 110px); align-items: center; position: relative; }
 .tour-media { position: relative; justify-self: center; width: 100%; max-width: 420px; }

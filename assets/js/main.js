@@ -294,22 +294,38 @@
     });
   });
 
-  /* Plant tour video: autoplay muted when visible, sound toggle, chapters */
-  var tour = document.querySelector(".tour-phone");
-  if (tour) {
+  /* Video players (.tour-phone): play when scrolled into view, with sound.
+     Browsers only allow sound after the visitor has clicked/tapped/typed on the page
+     at least once. Before that, the video starts muted and "Tap for sound" turns it on;
+     after that, every video that scrolls into view plays with sound. */
+  var tours = Array.prototype.slice.call(document.querySelectorAll(".tour-phone"));
+  var soundAllowed = false;
+  function fmt(t) { t = Math.floor(t || 0); return Math.floor(t / 60) + ":" + ("0" + (t % 60)).slice(-2); }
+  var players = tours.map(function (tour) {
     var v = tour.querySelector("video");
     var soundBtn = tour.querySelector(".tour-sound");
     var playBtn = tour.querySelector(".tour-play");
     var bar = tour.querySelector(".tour-progress");
     var fill = bar.querySelector("i");
     var time = tour.querySelector(".tour-time");
-    var chapterBtns = document.querySelectorAll(".chapters button");
-    var userPaused = false;
-    function fmt(t) { t = Math.floor(t || 0); return Math.floor(t / 60) + ":" + ("0" + (t % 60)).slice(-2); }
+    var section = tour.closest("section") || document;
+    var chapterBtns = section.querySelectorAll(".chapters button");
+    var P = { tour: tour, v: v, userPaused: false, userMuted: false, inView: false };
     function setPaused(p) { tour.classList.toggle("paused", p); playBtn.setAttribute("aria-label", p ? "Play video" : "Pause video"); }
-    function play() { var pr = v.play(); if (pr && pr.catch) pr.catch(function () { setPaused(true); }); }
+    function syncSound() { soundBtn.setAttribute("aria-pressed", v.muted ? "false" : "true"); }
+    P.play = function (withSound) {
+      players.forEach(function (o) { if (o !== P && !o.v.paused) o.v.pause(); });
+      if (withSound && !P.userMuted) v.muted = false;
+      var pr = v.play();
+      if (pr && pr.catch) pr.catch(function () {
+        if (!v.muted) { v.muted = true; syncSound(); var p2 = v.play(); if (p2 && p2.catch) p2.catch(function () { setPaused(true); }); }
+        else setPaused(true);
+      });
+      syncSound();
+    };
     v.addEventListener("play", function () { setPaused(false); });
     v.addEventListener("pause", function () { setPaused(true); });
+    v.addEventListener("volumechange", syncSound);
     v.addEventListener("timeupdate", function () {
       var pct = v.duration ? (v.currentTime / v.duration) * 100 : 0;
       fill.style.width = pct + "%"; bar.setAttribute("aria-valuenow", Math.round(pct)); time.textContent = fmt(v.currentTime);
@@ -317,16 +333,17 @@
       chapterBtns.forEach(function (b) { if (v.currentTime >= parseFloat(b.getAttribute("data-t"))) active = b; });
       chapterBtns.forEach(function (b) { b.classList.toggle("active", b === active); });
     });
-    function togglePlay() { if (v.paused) { userPaused = false; play(); } else { userPaused = true; v.pause(); } }
+    function togglePlay() { if (v.paused) { P.userPaused = false; P.play(soundAllowed); } else { P.userPaused = true; v.pause(); } }
     playBtn.addEventListener("click", togglePlay);
     v.addEventListener("click", togglePlay);
-    soundBtn.addEventListener("click", function () {
-      var on = v.muted;
-      v.muted = !on;
-      if (on && v.currentTime > 1 && soundBtn.getAttribute("data-started") !== "1") { v.currentTime = 0; }
+    soundBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var turnOn = v.muted;
+      P.userMuted = !turnOn;
+      v.muted = !turnOn;
+      if (turnOn && v.currentTime > 1 && soundBtn.getAttribute("data-started") !== "1") v.currentTime = 0;
       soundBtn.setAttribute("data-started", "1");
-      soundBtn.setAttribute("aria-pressed", on ? "true" : "false");
-      userPaused = false; play();
+      P.userPaused = false; P.play(turnOn);
     });
     bar.addEventListener("click", function (e) {
       var r = bar.getBoundingClientRect();
@@ -335,19 +352,35 @@
     chapterBtns.forEach(function (b) {
       b.addEventListener("click", function () {
         v.currentTime = parseFloat(b.getAttribute("data-t"));
-        userPaused = false; play();
+        P.userPaused = false; P.play(true);
         if (window.innerWidth < 1000) tour.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
       });
     });
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (en) {
-        en.forEach(function (e) {
-          if (e.isIntersecting) { if (!userPaused && !reduceMotion) play(); }
-          else if (!v.paused) v.pause();
-        });
-      }, { threshold: 0.35 }).observe(tour);
-    }
     if (reduceMotion) setPaused(true);
+    return P;
+  });
+  if (players.length) {
+    /* First click/tap/key anywhere unlocks sound; unmute a video already playing in view. */
+    var unlock = function (e) {
+      if (soundAllowed) return;
+      soundAllowed = true;
+      if (e && e.target && e.target.closest && e.target.closest(".tour-sound")) return;
+      players.forEach(function (P) { if (P.inView && !P.v.paused && !P.userMuted) P.v.muted = false; });
+      ["pointerdown", "keydown", "touchend"].forEach(function (t) { document.removeEventListener(t, unlock, true); });
+    };
+    ["pointerdown", "keydown", "touchend"].forEach(function (t) { document.addEventListener(t, unlock, true); });
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          var P = players.filter(function (o) { return o.tour === e.target; })[0];
+          if (!P) return;
+          P.inView = e.isIntersecting;
+          if (e.isIntersecting) { if (!P.userPaused && !reduceMotion) P.play(true); }
+          else if (!P.v.paused) P.v.pause();
+        });
+      }, { threshold: 0.5 });
+      players.forEach(function (P) { io.observe(P.tour); });
+    }
   }
 
   /* WhatsApp widget */
