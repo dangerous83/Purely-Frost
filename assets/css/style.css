@@ -1449,3 +1449,10 @@ body.wa-is-open .ai-agent { opacity: 0; pointer-events: none; }
   .ai-panel { position: fixed; right: 12px; left: 12px; bottom: 150px; width: auto; height: min(560px, calc(100svh - 170px)); }
 }
 @media (prefers-reduced-motion: reduce) { .ai-panel { transition: none; } .ai-msg { animation: none; } }
+
+/* Purity page: quality promise list (stands in for certification logos) */
+.promise-list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 14px; }
+.promise-list li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border-radius: 18px; background: linear-gradient(135deg, rgba(232,216,180,.45), rgba(232,216,180,.18)); border: 1px solid rgba(202,173,115,.35); }
+.promise-list .icon-box { flex-shrink: 0; margin: 0; }
+.promise-list b { display: block; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+.promise-list p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted, #5b6075); }
