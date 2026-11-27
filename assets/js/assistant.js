@@ -156,15 +156,15 @@
   var root = document.createElement("div");
   root.className = "ai-agent";
   root.innerHTML =
-    '<button class="ai-launch" type="button" aria-expanded="false" aria-controls="ai-panel" aria-label="Ask the FPH AI Assistant">' +
+    '<button class="ai-launch" type="button" aria-expanded="false" aria-controls="ai-panel" aria-label="Ask the FPH Assistant">' +
       '<svg class="ai-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>' +
       '<svg class="ai-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
-      '<span class="ai-tip">Ask FPH AI</span>' +
+      '<span class="ai-tip">Ask FPH</span>' +
     '</button>' +
-    '<section class="ai-panel" id="ai-panel" role="dialog" aria-label="FPH AI Assistant" hidden>' +
+    '<section class="ai-panel" id="ai-panel" role="dialog" aria-label="FPH Assistant" hidden>' +
       '<i class="cm-corner tl"></i><i class="cm-corner tr"></i><i class="cm-corner bl"></i><i class="cm-corner br"></i>' +
       '<header class="ai-head"><span class="ai-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z"/></svg></span>' +
-        '<div><b>FPH AI Assistant</b><small><i class="dot"></i>Online · answers from fphiceplant.com</small></div>' +
+        '<div><b>FPH Assistant</b><small><i class="dot"></i>Online · answers from fphiceplant.com</small></div>' +
         '<button class="ai-close" type="button" aria-label="Close assistant">&times;</button></header>' +
       '<div class="ai-log" aria-live="polite"></div>' +
       '<div class="ai-chips"></div>' +
@@ -244,7 +244,7 @@
       var w = document.querySelector(".wa-widget.wa-open .wa-x"); if (w) w.click();
       if (!started) {
         started = true;
-        add("bot", "Hi! I'm the <b>FPH AI Assistant</b>. I know everything on our website — products, delivery, purity, distributor tiers, investing and our plant. What would you like to know?");
+        add("bot", "Hi! I'm the <b>FPH Assistant</b>. I know everything on our website — products, delivery, purity, distributor tiers, investing and our plant. What would you like to know?");
         setChips(["What sizes do you sell?", "Do you deliver to my area?", "How do I become a distributor?", "Is your ice safe to drink?"]);
         build();
       }
