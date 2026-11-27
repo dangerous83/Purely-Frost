@@ -1,4 +1,21 @@
+# FPH Ice Plant — https://fphiceplant.com
 User-agent: *
+Allow: /
+
+# Search and AI assistants may read the whole public site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://fphiceplant.com/sitemap.xml

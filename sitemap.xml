@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fphiceplant.com/</loc><lastmod>2026-11-25</lastmod><priority>1.0</priority></url>
-  <url><loc>https://fphiceplant.com/about</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/solutions</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/products</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/purity</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/facility</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/distribution</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/distributors</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/invest</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/faq</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/contact</loc><lastmod>2026-11-25</lastmod><priority>0.8</priority></url>
-  <url><loc>https://fphiceplant.com/privacy</loc><lastmod>2026-11-25</lastmod><priority>0.3</priority></url>
-  <url><loc>https://fphiceplant.com/terms</loc><lastmod>2026-11-25</lastmod><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://fphiceplant.com/</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority><image:image><image:loc>https://fphiceplant.com/assets/img/hero-plant.webp</image:loc><image:title>FPH Ice Plant tube ice production plant in Batangas</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/products</loc><lastmod>2026-11-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><image:image><image:loc>https://fphiceplant.com/assets/img/ice-bag-1kg.webp</image:loc><image:title>FPH purified tube ice 1KG bag</image:title></image:image><image:image><image:loc>https://fphiceplant.com/assets/img/ice-bag-5kg.webp</image:loc><image:title>FPH purified tube ice 5KG bag</image:title></image:image><image:image><image:loc>https://fphiceplant.com/assets/img/ice-bag-10kg.webp</image:loc><image:title>FPH purified tube ice 10KG bag</image:title></image:image><image:image><image:loc>https://fphiceplant.com/assets/img/ice-bag-20kg.webp</image:loc><image:title>FPH purified tube ice 20KG bag</image:title></image:image><image:image><image:loc>https://fphiceplant.com/assets/img/ice-bulk-metric-ton.webp</image:loc><image:title>Bulk purified tube ice by the metric ton</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/solutions</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><image:image><image:loc>https://fphiceplant.com/assets/img/solutions-hero.webp</image:loc><image:title>FPH Ice Plant solutions</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/contact</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><image:image><image:loc>https://fphiceplant.com/assets/img/contact-hero.webp</image:loc><image:title>FPH Ice Plant contact</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/distributors</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://fphiceplant.com/assets/img/distributors-hero.webp</image:loc><image:title>FPH Ice Plant distributors</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/about</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://fphiceplant.com/assets/img/about-hero.webp</image:loc><image:title>FPH Ice Plant about</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/purity</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://fphiceplant.com/assets/img/purity-hero.webp</image:loc><image:title>FPH Ice Plant purity</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/facility</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://fphiceplant.com/assets/img/facility-hero.webp</image:loc><image:title>FPH Ice Plant facility</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/distribution</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://fphiceplant.com/assets/img/distribution-hero.webp</image:loc><image:title>FPH Ice Plant distribution</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/invest</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://fphiceplant.com/faq</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><image:image><image:loc>https://fphiceplant.com/assets/img/faq-hero.webp</image:loc><image:title>FPH Ice Plant faq</image:title></image:image></url>
+  <url><loc>https://fphiceplant.com/privacy</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://fphiceplant.com/terms</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>
